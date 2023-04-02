@@ -1,7 +1,8 @@
 # ML-CCC
 Base code for Machine Learning competitions
 
-Current regression models:
+
+## Current regression models:
   - LinearRegression
   - Ridge
   - Lasso
@@ -12,7 +13,7 @@ Current regression models:
   - AdaBoostRegressor
   - XGBRegressor
   
-Current classification models:
+## Current classification models:
   -
   -
   -
