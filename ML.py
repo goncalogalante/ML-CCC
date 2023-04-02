@@ -190,7 +190,7 @@ print("counter %d",count)
 # replace a value for another in a column
 df_train['UNIT'] = df_train['UNIT'].replace('K', 'C')
 
-# define the xtrain and ytrain in df mode
+# define the xtrain, ytrain and xtest in df mode
 x_train_df = df_train.drop("OUTPUT", axis=1)
 y_train_df = df_train["OUTPUT"]
 
