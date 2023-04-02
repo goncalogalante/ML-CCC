@@ -2,6 +2,13 @@
 Base code for Machine Learning competitions
 
 
+## Required Technologies
+  - Python 3
+  - Pandas
+  - Numpy
+  - Seaborn
+  - Scikit-learn
+
 ## Current regression models:
   - [LinearRegression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression)
   - [Ridge](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Ridge.html#sklearn.linear_model.Ridge)
@@ -18,6 +25,7 @@ Base code for Machine Learning competitions
   -
   -
   -
+ 
  
  
  
