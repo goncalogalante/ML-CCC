@@ -251,7 +251,7 @@ models, prediction = reg.fit(X_train, X_val, y_train, y_val)
 
 # use LazyClassifier
 #clf = LazyClassifier(verbose=0, ignore_warnings=True, custom_metric=None)
-#models, prediction = reg.fit(X_train, X_val, y_train, y_val)
+#models, prediction = clf.fit(X_train, X_val, y_train, y_val)
 
 # validation results
 print(models)
