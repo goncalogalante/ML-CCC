@@ -210,6 +210,19 @@ x_test_df['UNIT'] = x_test_df['UNIT'].replace(unit)
 x_test_df['POWER'] = x_test_df['POWER'].replace(power)
 x_test_df['MODE'] = x_test_df['MODE'].replace(mode)
 
+"""
+dropped columns based on PCA, units are irrelevant
+"""
+#x_train_df = x_train_df.drop("AMPS", axis=1)
+#x_train_df = x_train_df.drop("VOLTS", axis=1)
+x_train_df = x_train_df.drop("UNIT", axis=1)
+x_train_df = x_train_df.drop("GAMMA", axis=1)
+
+#x_test_df = x_test_df.drop("AMPS", axis=1)
+#x_test_df = x_test_df.drop("VOLTS", axis=1)
+x_test_df = x_test_df.drop("UNIT", axis=1)
+x_test_df = x_test_df.drop("GAMMA", axis=1)
+
 print(x_train_df)
 print(x_test_df)
 
@@ -233,17 +246,29 @@ x_test_df = pd.DataFrame(x_test_df_norm, columns=x_test_df.columns)
 
 # training data
 scaler = StandardScaler()
-x_train_df = scaler.fit_transform(x_train_df)
+x_train_scaled = scaler.fit_transform(x_train_df)
 
 # test data
 scaler_test = StandardScaler()
-x_test_df = scaler_test.fit_transform(x_test_df)
+x_test_scaled = scaler_test.fit_transform(x_test_df)
+
+## PCA
+"""
+from sklearn.decomposition import PCA
+pca = PCA(n_components=2)
+x_pca = pca.fit_transform(x_train_df)
+df_comp = pd.DataFrame(pca.components_,columns=x_train_df.columns)
+
+plt.figure(figsize=(12,6))
+sns.heatmap(df_comp,cmap='plasma')
+plt.show()
+"""
 
 #--------- VALIDATION ----------
 
 ## Lazy 
 # Splitting data into training and test sets to use in LAZY 
-X_train, X_val, y_train, y_val = train_test_split(x_train_df, y_train_df, test_size=0.2, random_state=42)
+X_train, X_val, y_train, y_val = train_test_split(x_train_scaled, y_train_df, test_size=0.2, random_state=42)
 
 # use LazyRegressor
 reg = LazyRegressor(verbose=0, ignore_warnings=True, custom_metric=mean_squared_error)
@@ -259,16 +284,16 @@ print(models)
 ## Manual Validation
 alpha_range=[0.001, 0.01, 0.1, 1, 10, 100, 1000]
 cv_size =  10
-#val_results = validate_regression(x_train_df, y_train_df,alpha_range,cv_size)
+#val_results = validate_regression(x_train_scaled, y_train_df,alpha_range,cv_size)
 
 #--------- FINAL ----------
 
 # choose model
 model = LinearRegression()
-model.fit(x_train_df, y_train_df)
+model.fit(x_train_scaled, y_train_df)
 
 # predict
-y_test = model.predict(x_test_df)
+y_test = model.predict(x_test_scaled)
 
 # Output CCC
 sys.stdout = open("Solution.txt", "w")
