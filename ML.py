@@ -201,7 +201,7 @@ unit = {'K': 0, 'C': 1, '?':2}
 power = {'high': 1, 'low': 0}
 mode = {'auto': 0, 'beam': 1, 'burst':2, 'REDACTED':3}
 
-# Replace the values in the 'POWER' column with the numerical values (train and test data)
+# replace the values in the 'POWER' column with the numerical values (train and test data)
 x_train_df['UNIT'] = x_train_df['UNIT'].replace(unit)
 x_train_df['POWER'] = x_train_df['POWER'].replace(power)
 x_train_df['MODE'] = x_train_df['MODE'].replace(mode)
@@ -209,6 +209,10 @@ x_train_df['MODE'] = x_train_df['MODE'].replace(mode)
 x_test_df['UNIT'] = x_test_df['UNIT'].replace(unit)
 x_test_df['POWER'] = x_test_df['POWER'].replace(power)
 x_test_df['MODE'] = x_test_df['MODE'].replace(mode)
+
+# correlation matrix
+corr_matrix = x_train_df.corr()
+print(corr_matrix)
 
 """
 dropped columns based on PCA, units are irrelevant
