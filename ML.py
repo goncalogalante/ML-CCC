@@ -12,6 +12,8 @@ from sklearn.linear_model import LinearRegression, Ridge, Lasso
 from sklearn.model_selection import GridSearchCV, train_test_split
 from sklearn.metrics import r2_score, mean_squared_error
 
+pd.options.display.float_format = '{:.8f}'.format
+
 # function to validation
 def validate_regression(x_train, y_train, alpha_range, cv_size):
 
@@ -211,8 +213,12 @@ x_test_df['POWER'] = x_test_df['POWER'].replace(power)
 x_test_df['MODE'] = x_test_df['MODE'].replace(mode)
 
 # correlation matrix
-corr_matrix = x_train_df.corr()
-print(corr_matrix)
+sns.heatmap(x_train_df.corr(),
+            annot = True,
+            fmt = '.2f',
+            cmap='Blues')
+plt.title('Correlation between variables')
+plt.show()
 
 """
 dropped columns based on PCA, units are irrelevant
